@@ -1,0 +1,13 @@
+apiVersion: v1
+entries:
+  prysm:
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2020-06-06T21:09:02.008481-04:00"
+    description: Prysm Ethereum 2.0 Node
+    digest: 91adb58afd45d8c24a44e6daed22a3e7afe568f897eeee7736be8e9936430459
+    name: prysm
+    urls:
+    - https://github.com/k/helm-charts/releases/download/prysm-0.1.0/prysm-0.1.0.tgz
+    version: 0.1.0
+generated: "2020-06-06T21:09:01.903691-04:00"
