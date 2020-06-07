@@ -17,6 +17,10 @@ Then configure a values.yaml for the chart you want to install.
 
 ## List of Charts
 
+### [prysm](./charts/prysm)
+
+[Prysm](https://prylabs.network/)'s Beacon Chain node.
+
 ### [smartnode](./charts/smartnode)
 
 [Rocket Pool](https://www.rocketpool.net/)'s [Smart Node](https://github.com/rocket-pool/smartnode) in Kubernetes.
