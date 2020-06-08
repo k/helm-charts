@@ -1,6 +1,25 @@
 apiVersion: v1
 entries:
+  geth:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2020-06-08T11:24:22.628913-04:00"
+    description: A Helm chart for Kubernetes
+    digest: 6c2536ff9f5b0af5dbb09942780529a0489bdb49c3e639b12b8e3d8e1f013520
+    name: geth
+    urls:
+    - https://github.com/k/helm-charts/releases/download/geth-0.1.0/geth-0.1.0.tgz
+    version: 0.1.0
   prysm:
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2020-06-08T11:24:22.922206-04:00"
+    description: Prysm Ethereum 2.0 Node
+    digest: 125f2e09cb1a8462e65af2cec1b3a1446fd550a2f1f7e77c24a92b699687cc03
+    name: prysm
+    urls:
+    - https://github.com/k/helm-charts/releases/download/prysm-0.2.0/prysm-0.2.0.tgz
+    version: 0.2.0
   - apiVersion: v2
     appVersion: 0.0.0
     created: "2020-06-06T21:09:02.008481-04:00"

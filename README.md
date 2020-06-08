@@ -17,13 +17,17 @@ Then configure a values.yaml for the chart you want to install.
 
 ## List of Charts
 
+### [geth](./charts/geth)
+
+[Geth](https://geth.ethereum.org/) node helm chart.
+
 ### [prysm](./charts/prysm)
 
-[Prysm](https://prylabs.network/)'s Beacon Chain node.
+[Prysm](https://prylabs.network/) Beacon Chain node.
 
 ### [smartnode](./charts/smartnode)
 
-[Rocket Pool](https://www.rocketpool.net/)'s [Smart Node](https://github.com/rocket-pool/smartnode) in Kubernetes.
+[Rocket Pool](https://www.rocketpool.net/)'s [Smart Node](https://github.com/rocket-pool/smartnode).
 
 ## Deploy to Github Pages
 
