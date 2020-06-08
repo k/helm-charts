@@ -55,11 +55,11 @@ ingress:
 
 resources:
   limits:
-    cpu: 2
-    memory: 4Gi
-  requests:
     cpu: 1
-    memory: 2Gi
+    memory: 1024Mi
+  requests:
+    cpu: 500m
+    memory: 512Mi
 
 autoscaling:
   enabled: false
@@ -70,6 +70,9 @@ autoscaling:
 
 nodeSelector: {}
 
-tolerations: []
+tolerations: # []
+- key: eth
+  value: prysm
+  effect: NoSchedule
 
 affinity: {}
