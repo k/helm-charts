@@ -1,0 +1,95 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "geth.fullname" . }}
+  labels:
+    {{- include "geth.labels" . | nindent 4 }}
+spec:
+  serviceName: {{ include "geth.fullname" . }}
+{{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+{{- end }}
+  podManagementPolicy: "Parallel"
+  selector:
+    matchLabels:
+      {{- include "geth.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+    {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      labels:
+        {{- include "geth.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "geth.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+          - --{{ .Values.network }}
+          {{- if .Values.rpc.enabled }}
+          - --rpc
+          {{- end }}
+          {{- if .Values.ws.enabled }}
+          - --ws
+          {{- end }}
+          - --ipcdisable
+          - --datadir=/data
+          ports:
+            - name: rpc
+              containerPort: 8545
+              protocol: TCP
+            - name: ws
+              containerPort: 8546
+              protocol: TCP
+            - name: peer-tcp
+              containerPort: 30303
+              hostPort: 30303
+              protocol: TCP
+            - name: peer-udp
+              containerPort: 30304
+              hostPort: 30304
+              protocol: UDP
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: rpc
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: rpc
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+          - name: data
+            mountPath: /data
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: {{ .Values.persistence.size }}
