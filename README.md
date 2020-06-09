@@ -1,6 +1,6 @@
 # Kryptonetes Helm Chart Repository
 
-This is an registry of my [helm](https://helm.sh/) charts.
+This is a registry of my [helm](https://helm.sh/) charts.
 
 ## Prerequisites
 * [Helm](https://helm.sh/) 3+
