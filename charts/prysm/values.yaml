@@ -2,6 +2,8 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+httpWeb3Provider: "http://geth.geth.svc:8545" # by default it uses https://goerli.prylabs.net
+
 replicaCount: 1
 
 image:
@@ -55,11 +57,11 @@ ingress:
 
 resources:
   limits:
-    cpu: 1
-    memory: 1024Mi
+    cpu: 1.5
+    memory: 6Gi
   requests:
-    cpu: 500m
-    memory: 512Mi
+    cpu: 1
+    memory: 4Gi
 
 autoscaling:
   enabled: false
@@ -72,7 +74,7 @@ nodeSelector: {}
 
 tolerations: # []
 - key: eth
-  value: prysm
+  operator: Exists
   effect: NoSchedule
 
 affinity: {}

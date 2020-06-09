@@ -37,16 +37,28 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
           - --{{ .Values.network }}
-          {{- if .Values.rpc.enabled }}
-          - --rpc
+          {{- with .Values.http }}
+          {{- if .enabled }}
+          - --http
+          - --http.addr={{ .addr }}
+          - --http.corsdomain={{ .corsdomain }}
+          - --http.vhosts={{ .vhosts }}
           {{- end }}
-          {{- if .Values.ws.enabled }}
+          {{- end }}
+          {{- with .Values.ws }}
+          {{- if .enabled }}
           - --ws
+          - --ws.addr={{ .addr }}
+          - --ws.origins={{ .origins }}
+          {{- end }}
           {{- end }}
           - --ipcdisable
           - --datadir=/data
+          {{- if .Values.extraArgs }}
+          {{- toYaml .Values.extraArgs | nindent 10}}
+          {{- end }}
           ports:
-            - name: rpc
+            - name: http
               containerPort: 8545
               protocol: TCP
             - name: ws
@@ -63,11 +75,11 @@ spec:
           # livenessProbe:
           #   httpGet:
           #     path: /
-          #     port: rpc
+          #     port: http
           # readinessProbe:
           #   httpGet:
           #     path: /
-          #     port: rpc
+          #     port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:

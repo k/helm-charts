@@ -52,6 +52,9 @@ spec:
               protocol: UDP
           args:
           - --datadir=/data
+          {{- if .Values.httpWeb3Provider }}
+          - --http-web3provider={{ .Values.httpWeb3Provider }}
+          {{- end}}
           livenessProbe:
             httpGet:
               path: /eth/v1alpha1/node/version
