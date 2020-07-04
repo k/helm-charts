@@ -63,4 +63,5 @@ cr index --config config.yaml
 git add index.yaml
 git commit -m "Update index.yaml"
 git push
+rm .deploy/*
 ```
