@@ -29,6 +29,10 @@ Then configure a values.yaml for the chart you want to install.
 
 [Rocket Pool](https://www.rocketpool.net/)'s [Smart Node](https://github.com/rocket-pool/smartnode).
 
+### [hlf-ca](./charts/hlf-ca)
+
+[Fabric CA](https://github.com/hyperledger/fabric-ca) deployment.
+
 ## Deploy to Github Pages
 
 Deploy requires [`cr`](https://github.com/helm/chart-releaser) tool 
