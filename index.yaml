@@ -19,6 +19,36 @@ entries:
     urls:
     - https://github.com/k/helm-charts/releases/download/geth-0.1.0/geth-0.1.0.tgz
     version: 0.1.0
+  hlf-ca:
+  - apiVersion: v2
+    appVersion: 1.4.7
+    created: "2020-07-04T10:59:40.646285-04:00"
+    description: Hyperledger Fabric Certificate Authority chart (these charts are
+      created by AID:Tech and are currently not directly associated with the Hyperledger
+      project)
+    digest: 76eea92ec9558bf28e5a5f6306700a8053f84e52a65da0251dc37e51116e6d75
+    home: http://hyperledger-fabric-ca.readthedocs.io
+    icon: https://www.hyperledger.org/wp-content/uploads/2018/04/fabric-logo.png
+    keywords:
+    - blockchain
+    - hyperledger
+    - fabric
+    maintainers:
+    - email: sasha@aid.technology
+      name: alexvicegrab
+    - email: inzamam@aid.technology
+      name: inzamam-iqbal
+    - email: diego@aid.technology
+      name: dbandin
+    - email: kbambridge1@gmail.com
+      name: kbambridge
+    name: hlf-ca
+    sources:
+    - https://github.com/hyperledger/fabric-ca
+    - https://github.com/k/helm-charts/tree/master/charts/hlf-ca
+    urls:
+    - https://github.com/k/helm-charts/releases/download/hlf-ca-1.2.1/hlf-ca-1.2.1.tgz
+    version: 1.2.1
   prysm:
   - apiVersion: v2
     appVersion: 0.0.0
