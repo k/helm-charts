@@ -37,6 +37,10 @@ Deploy requires [`cr`](https://github.com/helm/chart-releaser) tool
 
 Settings > Options > Github Pages > Source > Select master branch
 
+### Commit Chart changes
+
+Make sure the chart version is bumped.
+
 ### Package chart
 
 ```
