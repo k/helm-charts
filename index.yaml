@@ -22,6 +22,35 @@ entries:
   hlf-ca:
   - apiVersion: v2
     appVersion: 1.4.7
+    created: "2020-07-04T12:36:35.160078-04:00"
+    description: Hyperledger Fabric Certificate Authority chart (these charts are
+      created by AID:Tech and are currently not directly associated with the Hyperledger
+      project)
+    digest: 67c28da3431bacf293813bde153a3ad41c539842a49db0c3f468cd2d656487af
+    home: http://hyperledger-fabric-ca.readthedocs.io
+    icon: https://www.hyperledger.org/wp-content/uploads/2018/04/fabric-logo.png
+    keywords:
+    - blockchain
+    - hyperledger
+    - fabric
+    maintainers:
+    - email: sasha@aid.technology
+      name: alexvicegrab
+    - email: inzamam@aid.technology
+      name: inzamam-iqbal
+    - email: diego@aid.technology
+      name: dbandin
+    - email: kbambridge1@gmail.com
+      name: kbambridge
+    name: hlf-ca
+    sources:
+    - https://github.com/hyperledger/fabric-ca
+    - https://github.com/k/helm-charts/tree/master/charts/hlf-ca
+    urls:
+    - https://github.com/k/helm-charts/releases/download/hlf-ca-1.2.3/hlf-ca-1.2.3.tgz
+    version: 1.2.3
+  - apiVersion: v2
+    appVersion: 1.4.7
     created: "2020-07-04T11:22:29.998837-04:00"
     description: Hyperledger Fabric Certificate Authority chart (these charts are
       created by AID:Tech and are currently not directly associated with the Hyperledger
