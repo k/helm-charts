@@ -9,3 +9,6 @@ data:
   FABRIC_CA_HOME: /var/hyperledger/fabric-ca
   FABRIC_CA_SERVER_CA_NAME: {{ .Values.caName | quote }}
   SERVICE_DNS: 0.0.0.0  # Point to itself
+  {{- if .Values.config.mountTLS }}
+  FABRIC_CA_CLIENT_TLS_CERTFILES: /var/hyperledger/tls/secret/tls.crt
+  {{- end }}
