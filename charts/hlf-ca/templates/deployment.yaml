@@ -141,10 +141,16 @@ spec:
           livenessProbe:
             httpGet:
               path: /cainfo
+              {{- if .Values.config.tls.enabled }}
+              scheme: HTTPS
+              {{- end }}
               port: 7054
           readinessProbe:
             httpGet:
               path: /cainfo
+              {{- if .Values.config.tls.enabled }}
+              scheme: HTTPS
+              {{- end }}
               port: 7054             
           volumeMounts:
             - name: data
