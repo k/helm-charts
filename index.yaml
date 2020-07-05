@@ -136,6 +136,58 @@ entries:
     urls:
     - https://github.com/k/helm-charts/releases/download/hlf-ca-1.2.1/hlf-ca-1.2.1.tgz
     version: 1.2.1
+  hlf-ord:
+  - apiVersion: v1
+    appVersion: 1.4.7
+    created: "2020-07-05T00:15:07.734917-04:00"
+    description: Hyperledger Fabric Orderer chart (these charts are created by AID:Tech
+      and are currently not directly associated with the Hyperledger project)
+    digest: 0a5fd84f7a27cb983af7ffac2ad54a28cd5f1e5af697737beb39ce43c411d444
+    home: http://hyperledger-fabric.readthedocs.io
+    icon: https://www.hyperledger.org/wp-content/uploads/2018/04/fabric-logo.png
+    keywords:
+    - blockchain
+    - hyperledger
+    - fabric
+    maintainers:
+    - email: sasha@aid.technology
+      name: alexvicegrab
+    - email: inzamam@aid.technology
+      name: inzamam-iqbal
+    - email: diego@aid.technology
+      name: dbandin
+    name: hlf-ord
+    sources:
+    - https://github.com/hyperledger/fabric
+    urls:
+    - https://github.com/k/helm-charts/releases/download/hlf-ord-1.3.1/hlf-ord-1.3.1.tgz
+    version: 1.3.1
+  hlf-peer:
+  - apiVersion: v1
+    appVersion: 1.4.7
+    created: "2020-07-05T00:15:07.798289-04:00"
+    description: Hyperledger Fabric Peer chart (these charts are created by AID:Tech
+      and are currently not directly associated with the Hyperledger project)
+    digest: 1b317b0433fdd1dfeff0ef19edd622ccbf9aa3e8d22264f67a9694385f1d1aad
+    home: http://hyperledger-fabric.readthedocs.io
+    icon: https://www.hyperledger.org/wp-content/uploads/2018/04/fabric-logo.png
+    keywords:
+    - blockchain
+    - hyperledger
+    - fabric
+    maintainers:
+    - email: sasha@aid.technology
+      name: alexvicegrab
+    - email: inzamam@aid.technology
+      name: inzamam-iqbal
+    - email: diego@aid.technology
+      name: dbandin
+    name: hlf-peer
+    sources:
+    - https://github.com/hyperledger/fabric
+    urls:
+    - https://github.com/k/helm-charts/releases/download/hlf-peer-1.3.1/hlf-peer-1.3.1.tgz
+    version: 1.3.1
   prysm:
   - apiVersion: v2
     appVersion: 0.0.0
