@@ -4,7 +4,7 @@
 
 image:
   repository: hyperledger/fabric-ca
-  tag: 2.1
+  tag: 1.4.7
   pullPolicy: IfNotPresent
 
 service:
@@ -112,7 +112,7 @@ externalDatabase:
 
 ## Settings used in configMap "--config"
 config:
-  hlfToolsVersion: 2.1
+  hlfToolsVersion: 1.4.7
   ## Mount the TLS certificate & key to disk?
   mountTLS: false
   ## Enable TLS, make sure to enable ssl passthrough on ingress
