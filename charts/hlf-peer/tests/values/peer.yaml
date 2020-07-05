@@ -6,6 +6,7 @@ secrets:
     cert: hlf--peer0-idcert
     key: hlf--peer0-idkey
     caCert: hlf--peer-cacert
-  channel: hlf--channel
+  channels:
+    - hlf--channel
   adminCert: hlf--peer-admincert
   adminKey: hlf--peer-adminkey

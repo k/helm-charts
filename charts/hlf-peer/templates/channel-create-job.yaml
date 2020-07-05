@@ -1,0 +1,82 @@
+{{- if .Values.channel.create.enabled }}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ include "hlf-peer.fullname" . }}-create-channel
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+  labels:
+    {{- include "labels.standard" . | nindent 4 }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  # "namespace" omitted since ClusterRoles are not namespaced
+  name: {{ include "hlf-peer.fullname" . }}-create-channel
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+  labels:
+    {{- include "labels.standard" . | nindent 4 }}
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list",]
+- apiGroups: [""]
+  resources: ["pods/exec"]
+  verbs: ["create"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  # "namespace" omitted since ClusterRoles are not namespaced
+  name: {{ include "hlf-peer.fullname" . }}-create-channel
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+  labels:
+    {{- include "labels.standard" . | nindent 4 }}
+subjects:
+- kind: ServiceAccount
+  name: {{ include "hlf-peer.fullname" . }}-create-channel
+  apiGroup: ""
+roleRef:
+  kind: Role
+  name: {{ include "hlf-peer.fullname" . }}-create-channel
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "hlf-peer.fullname" . }}-create-channel
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation
+  labels:
+    {{- include "labels.standard" . | nindent 4 }}
+spec:
+  backoffLimit: 2
+  template:
+    metadata:
+      name: {{ include "hlf-peer.fullname" . }}-create-channel
+      labels:
+        {{- include "labels.standard" . | nindent 10 }}
+    spec:
+      serviceAccountName: {{ include "hlf-peer.fullname" .}}-create-channel
+      restartPolicy: Never
+      containers:
+        - name: fabric-ca-client
+          image: "{{ .Values.clientImage.repository }}:{{ .Values.clientImage.tag }}"
+          imagePullPolicy: {{ .Values.clientImage.pullPolicy }}
+          command:
+          - sh
+          - -c
+          - |
+            wget https://storage.googleapis.com/kubernetes-release/release/{{ .Capabilities.KubeVersion }}/bin/linux/amd64/kubectl && \
+            chmod +x kubectl;
+            PEER_POD=$(./kubectl get pods -l='{{ include  "labels.standard" . | replace "\n" "," | replace "\"" "" | nospace | replace ":" "=" }}' -ojsonpath="{.items[0].metadata.name}")
+            {{- range .Values.channel.create.channels }}
+            ./kubectl exec -t $PEER_POD -- peer channel create -o {{ $.Values.channel.orderer }} -c {{ .name }} -f /hl_config/channel/{{ .secretName }}/{{ .fileName | default (print .name ".tx") }} && \
+            {{- end }}
+            echo "Created all channels"
+
+{{- end }}

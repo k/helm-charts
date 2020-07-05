@@ -60,7 +60,6 @@ data:
   CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS: {{ .Values.peer.couchdbInstance }}-hlf-couchdb:5984
   {{- end }}
   PEER_CFG_PATH: /var/hyperledger/config
-  FABRIC_CFG_PATH: /var/hyperledger/fabric_cfg
   GODEBUG: "netdns=go"
   ADMIN_MSP_PATH: /var/hyperledger/admin_msp
   ORD_TLS_PATH: /var/hyperledger/tls/ord/cert

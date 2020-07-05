@@ -1,0 +1,78 @@
+{{- if .Values.enroll.enabled }}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ include "hlf-peer.fullname" . }}-enroll
+  annotations:
+    helm.sh/hook: pre-install
+  labels:
+    {{- include "labels.standard" . | nindent 4 }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  # "namespace" omitted since ClusterRoles are not namespaced
+  name: {{ include "hlf-peer.fullname" . }}-enroll
+  annotations:
+    helm.sh/hook: pre-install
+  labels:
+    {{- include "labels.standard" . | nindent 4 }}
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["create", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  # "namespace" omitted since ClusterRoles are not namespaced
+  name: {{ include "hlf-peer.fullname" . }}-enroll
+  annotations:
+    helm.sh/hook: pre-install
+  labels:
+    {{- include "labels.standard" . | nindent 4 }}
+subjects:
+- kind: ServiceAccount
+  name: {{ include "hlf-peer.fullname" . }}-enroll
+  apiGroup: ""
+roleRef:
+  kind: Role
+  name: {{ include "hlf-peer.fullname" . }}-enroll
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "hlf-peer.fullname" . }}-enroll
+  annotations:
+    helm.sh/hook: pre-install
+    helm.sh/hook-delete-policy: before-hook-creation
+  labels:
+    {{- include "labels.standard" . | nindent 4 }}
+spec:
+  backoffLimit: 2
+  template:
+    metadata:
+      name: {{ include "hlf-peer.fullname" . }}-enroll
+      labels:
+        {{- include "labels.standard" . | nindent 10 }}
+    spec:
+      serviceAccountName: {{ include "hlf-peer.fullname" .}}-enroll
+      restartPolicy: Never
+      containers:
+        - name: fabric-ca-client
+          image: "{{ .Values.clientImage.repository }}:{{ .Values.clientImage.tag }}"
+          imagePullPolicy: {{ .Values.clientImage.pullPolicy }}
+          command:
+          - sh
+          - -c
+          - |
+            fabric-ca-client enroll -d -u http://{{ .Values.enroll.user }}:{{ .Values.enroll.secret }}@{{ .Values.enroll.caHost}} && \
+            wget https://storage.googleapis.com/kubernetes-release/release/{{ .Capabilities.KubeVersion }}/bin/linux/amd64/kubectl && \
+            chmod +x kubectl && \
+            ./kubectl delete secret {{ .Values.secrets.peer.cert }} {{ .Values.secrets.peer.key }} || echo "Secrets didn't exist" && \
+            ./kubectl create secret generic {{ .Values.secrets.peer.cert }} --from-file=cert.pem=$(ls $FABRIC_CA_HOME/msp/signcerts/cert.pem ) && \
+            ./kubectl create secret generic {{ .Values.secrets.peer.key }} --from-file=key.pem=$(ls $FABRIC_CA_HOME/msp/keystore/*_sk)
+        
+{{- end }}

@@ -7,6 +7,29 @@ image:
   tag: 2.1
   pullPolicy: IfNotPresent
 
+clientImage:
+  repository: hyperledger/fabric-ca
+  tag: 1.4.7
+  pullPolicy: IfNotPresent
+
+
+enroll: # Note currently TLS is not supported for enrollment
+  enabled: false
+
+  user: "peer"
+  secret: "peer"
+  caHost: hlf-ca
+
+channel:
+  create:
+    enabled: false
+    channels: []
+    # - name: 
+    #   secretName: 
+    #   fileName: # defaults to *.tx
+
+  orderer: hlf-ca
+
 service:
   # Cluster IP or LoadBalancer
   type: ClusterIP
@@ -80,13 +103,13 @@ peer:
 # Secrets references, empty by default, fill in with your secrets (particularly adminCert) or add Peer Admin certificate manually after launching chart.
 secrets:
   ## These secrets should contain the Orderer crypto materials and credentials
-  peer: {}
+  peer:
     ## Credentials, saved under keys 'CA_USERNAME' and 'CA_PASSWORD'
     # cred: hlf--peer1-cred
     ## Certificate, saved under key 'cert.pem'
-    # cert: hlf--peer1-idcert
+    cert: hlf-peer-idcert
     ## Key, saved under 'key.pem'
-    # key: hlf--peer1-idkey
+    key: hlf-peer-idkey
     ## CA Cert, saved under 'cacert.pem'
     # caCert: hlf--peer1-cacert
     ## Intermediate CA Cert (optional), saved under 'intermediatecacert.pem'
