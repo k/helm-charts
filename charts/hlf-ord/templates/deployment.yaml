@@ -100,39 +100,7 @@ spec:
               - /var/hyperledger
             initialDelaySeconds: 15
           command:
-            - bash
-            - -c
-            - |
-
-              while [ ! -d /var/hyperledger/admin_msp/admincerts ] || [ -z "$(ls -A /var/hyperledger/admin_msp/admincerts)" ];
-              do
-                echo "\033[0;31m /var/hyperledger/admin_msp/admincerts must contain Ord admin certificates files \033[0m"
-                sleep 60
-              done
-
-              while [ ! -d /hl_config/genesis ] || [ -z "$(ls -A /hl_config/genesis)" ];
-              do
-                echo "\033[0;31m /hl_config/genesis must contain Genesis transaction \033[0m"
-                sleep 60
-              done
-
-              while [ ! -d ${ORDERER_GENERAL_LOCALMSPDIR}/signcerts ];
-              do
-                echo "\033[0;31m ${ORDERER_GENERAL_LOCALMSPDIR}/signcerts directory must exist \033[0m"
-                sleep 60
-              done
-
-              echo "\033[0;32m Create ${ORDERER_FILELEDGER_LOCATION} directory to avoid restarts \033[0m"
-              mkdir -p ${ORDERER_FILELEDGER_LOCATION}
-              mkdir -p ${ORDERER_FILELEDGER_LOCATION}/index
-
-              if [ $ORDERER_GENERAL_TLS_CLIENTAUTHREQUIRED ]
-              then
-                export ORDERER_GENERAL_TLS_CLIENTROOTCAS=$(echo $(ls $ORDERER_GENERAL_TLS_CLIENTROOTCAS) | echo "[$(sed 's/ /,/g')]")
-              fi
-
-              echo ">\033[0;35m orderer \033[0m"
-              orderer
+            - orderer
           envFrom:
             {{- if .Values.secrets.ord.cred }}
             - secretRef:
