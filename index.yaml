@@ -197,6 +197,31 @@ entries:
   hlf-ord:
   - apiVersion: v1
     appVersion: "2.1"
+    created: "2020-07-05T01:06:29.976225-04:00"
+    description: Hyperledger Fabric Orderer chart (these charts are created by AID:Tech
+      and are currently not directly associated with the Hyperledger project)
+    digest: 83bf7c11131d8c30c94fdfa14499df6ebd564349386109ef148e959525e02bc4
+    home: http://hyperledger-fabric.readthedocs.io
+    icon: https://www.hyperledger.org/wp-content/uploads/2018/04/fabric-logo.png
+    keywords:
+    - blockchain
+    - hyperledger
+    - fabric
+    maintainers:
+    - email: sasha@aid.technology
+      name: alexvicegrab
+    - email: inzamam@aid.technology
+      name: inzamam-iqbal
+    - email: diego@aid.technology
+      name: dbandin
+    name: hlf-ord
+    sources:
+    - https://github.com/hyperledger/fabric
+    urls:
+    - https://github.com/k/helm-charts/releases/download/hlf-ord-2.0.1/hlf-ord-2.0.1.tgz
+    version: 2.0.1
+  - apiVersion: v1
+    appVersion: "2.1"
     created: "2020-07-05T00:50:16.789068-04:00"
     description: Hyperledger Fabric Orderer chart (these charts are created by AID:Tech
       and are currently not directly associated with the Hyperledger project)
@@ -246,6 +271,31 @@ entries:
     - https://github.com/k/helm-charts/releases/download/hlf-ord-1.3.1/hlf-ord-1.3.1.tgz
     version: 1.3.1
   hlf-peer:
+  - apiVersion: v1
+    appVersion: "2.1"
+    created: "2020-07-05T01:06:30.039897-04:00"
+    description: Hyperledger Fabric Peer chart (these charts are created by AID:Tech
+      and are currently not directly associated with the Hyperledger project)
+    digest: 10e5c8111157c42b8438720394905b5d2b912eb56110396b06a30356e51937f5
+    home: http://hyperledger-fabric.readthedocs.io
+    icon: https://www.hyperledger.org/wp-content/uploads/2018/04/fabric-logo.png
+    keywords:
+    - blockchain
+    - hyperledger
+    - fabric
+    maintainers:
+    - email: sasha@aid.technology
+      name: alexvicegrab
+    - email: inzamam@aid.technology
+      name: inzamam-iqbal
+    - email: diego@aid.technology
+      name: dbandin
+    name: hlf-peer
+    sources:
+    - https://github.com/hyperledger/fabric
+    urls:
+    - https://github.com/k/helm-charts/releases/download/hlf-peer-2.0.1/hlf-peer-2.0.1.tgz
+    version: 2.0.1
   - apiVersion: v1
     appVersion: "2.1"
     created: "2020-07-05T00:50:16.855945-04:00"
