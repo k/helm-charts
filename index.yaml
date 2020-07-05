@@ -273,6 +273,31 @@ entries:
   hlf-peer:
   - apiVersion: v1
     appVersion: "2.1"
+    created: "2020-07-05T13:57:54.414592-04:00"
+    description: Hyperledger Fabric Peer chart (these charts are created by AID:Tech
+      and are currently not directly associated with the Hyperledger project)
+    digest: d4f40f82200154c3325e63aa1b98fdbd89effecb5888ff2c45ff42ec9e2ff671
+    home: http://hyperledger-fabric.readthedocs.io
+    icon: https://www.hyperledger.org/wp-content/uploads/2018/04/fabric-logo.png
+    keywords:
+    - blockchain
+    - hyperledger
+    - fabric
+    maintainers:
+    - email: sasha@aid.technology
+      name: alexvicegrab
+    - email: inzamam@aid.technology
+      name: inzamam-iqbal
+    - email: diego@aid.technology
+      name: dbandin
+    name: hlf-peer
+    sources:
+    - https://github.com/hyperledger/fabric
+    urls:
+    - https://github.com/k/helm-charts/releases/download/hlf-peer-2.1.0/hlf-peer-2.1.0.tgz
+    version: 2.1.0
+  - apiVersion: v1
+    appVersion: "2.1"
     created: "2020-07-05T01:06:30.039897-04:00"
     description: Hyperledger Fabric Peer chart (these charts are created by AID:Tech
       and are currently not directly associated with the Hyperledger project)
